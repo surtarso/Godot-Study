@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scr/bullets/PB0.tscn" type="PackedScene" id=1]
+
+[node name="PB1" type="Node2D"]
+
+[node name="PB0_1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 16 )
+
+[node name="PB0_2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -16 )

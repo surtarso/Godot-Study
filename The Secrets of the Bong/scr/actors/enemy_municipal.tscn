@@ -1,0 +1,280 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://assets/enemies/enemy_municipal.png" type="Texture" id=1]
+[ext_resource path="res://scr/actors/enemy_municipal.gd" type="Script" id=2]
+[ext_resource path="res://assets/enemies/enemy_municipal_hit1.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/enemies/enemy_municipal_hit2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/enemies/enemy_chase1.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/enemies/enemy_chase3.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/enemies/enemy_chase2.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/userinterface/game_icon.png" type="Texture" id=8]
+[ext_resource path="res://assets/objects/roach.png" type="Texture" id=9]
+[ext_resource path="res://assets/enemies/enemy_patrol.wav" type="AudioStream" id=10]
+[ext_resource path="res://scr/actors/enemy_patrol.gd" type="Script" id=11]
+[ext_resource path="res://assets/enemies/enemy_high.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/objects/speech_bubble.png" type="Texture" id=13]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "bribed",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "suit_effect",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "patrol",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 9 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 9 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=20]
+radius = 6.21811
+height = 10.0692
+
+[sub_resource type="CapsuleShape2D" id=21]
+radius = 6.86521
+height = 0.0
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 2.34103, 24.1558 )
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 0, 0.0627451, 1, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+
+[node name="Enemy_Municipal" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -16 )
+frames = SubResource( 14 )
+animation = "idle"
+playing = true
+flip_h = true
+
+[node name="stoned" type="Sprite" parent="Sprite"]
+visible = false
+position = Vector2( 0.357193, -11.3771 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 8 )
+
+[node name="tookroach" type="AnimatedSprite" parent="Sprite"]
+visible = false
+position = Vector2( -8, 9 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 19 )
+frame = 3
+playing = true
+
+[node name="WorldCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -11.0974 )
+shape = SubResource( 20 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -0.245652, 5.1587 )
+scale = Vector2( 1.4913, 1.4913 )
+rect = Rect2( -8, -21, 17, 21 )
+process_parent = true
+physics_process_parent = true
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 16
+
+[node name="hitbox" type="CollisionShape2D" parent="PlayerDetector"]
+modulate = Color( 0.14902, 0.278431, 0.584314, 1 )
+position = Vector2( 2.8914, -7.77024 )
+shape = SubResource( 21 )
+
+[node name="PlayerChase" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 0
+
+[node name="hitbox" type="CollisionShape2D" parent="PlayerChase"]
+position = Vector2( -72, -10 )
+rotation = 1.5708
+shape = SubResource( 22 )
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="enemy_hit1" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 3 )
+bus = "Effects"
+
+[node name="enemy_hit2" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 4 )
+bus = "Effects"
+
+[node name="enemy_chase1" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource( 5 )
+bus = "Effects"
+
+[node name="enemy_chase2" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource( 7 )
+bus = "Effects"
+
+[node name="enemy_chase3" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource( 6 )
+bus = "Effects"
+
+[node name="enemy_patrol" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource( 10 )
+max_distance = 300.0
+bus = "Ambience"
+script = ExtResource( 11 )
+
+[node name="enemy_high" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource( 12 )
+bus = "Effects"
+
+[node name="RestTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="FlipTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="SpeechTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ChaseColors" type="AnimationPlayer" parent="."]
+anims/patrol = SubResource( 23 )
+anims/siren = SubResource( 24 )
+
+[node name="speech_bubble" type="Sprite" parent="."]
+visible = false
+show_behind_parent = true
+position = Vector2( 25.25, -38 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="speech_bubble"]
+margin_left = -53.0
+margin_top = -25.0
+margin_right = 54.0
+margin_bottom = 6.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+max_lines_visible = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_entered" from="PlayerChase" to="." method="_on_PlayerChase_body_entered"]

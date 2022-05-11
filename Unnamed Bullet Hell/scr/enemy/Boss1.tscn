@@ -1,0 +1,510 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://scr/enemy/Boss1.gd" type="Script" id=1]
+[ext_resource path="res://assets/enemies/boss1.png" type="Texture" id=2]
+[ext_resource path="res://scr/bullets/BB2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scr/bullets/BB1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scr/bullets/BB0.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/roundshadow.png" type="Texture" id=6]
+[ext_resource path="res://scr/items/HealthDrop.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scr/items/DoubleShotDrop.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scr/items/TripleShotDrop.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scr/items/SpeedDrop.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/enemies/boss1normal.png" type="Texture" id=11]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 100.0
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.515748, 1 )
+colors = PoolColorArray( 0.175781, 0.0295258, 0.0295258, 1, 0.453125, 0, 0, 1, 0.257812, 0.0735168, 0.0735168, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 1024
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.515748, 1 )
+colors = PoolColorArray( 0.652344, 0, 0, 1, 1, 0, 0, 1, 0.707031, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+width = 1024
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform sampler2D dissolve_texture : hint_albedo;
+uniform float dissolve_value : hint_range(0,1);
+
+void fragment(){
+    vec4 main_texture = texture(TEXTURE, UV);
+    vec4 noise_texture = texture(dissolve_texture, UV);
+    main_texture.a *= floor(dissolve_value + min(1, noise_texture.x));
+    COLOR = main_texture;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=7]
+
+[sub_resource type="NoiseTexture" id=8]
+noise = SubResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 6 )
+shader_param/dissolve_value = 1.0
+shader_param/dissolve_texture = SubResource( 8 )
+
+[sub_resource type="Animation" id=10]
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1, 4 ),
+"transitions": PoolRealArray( 1, 2.54912, 0.241484, 8.28211, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1 ), Vector2( 1, 1.5 ), Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 3.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.992157, 0.992157, 0.992157, 1 ), Color( 1, 0, 0.560784, 1 ), Color( 1, 0, 0.560784, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_physics_process"
+}, {
+"args": [ false ],
+"method": "set_physics_process"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionPolygon2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:material:shader_param/dissolve_value")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 3.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BackLight:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("HealthBar:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 1.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.5, 1.6, 1.7, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.748, 0.4675, 0.85, 1 ), Color( 1, 0, 0, 1 ), Color( 2.89, 0, 0, 1 ), Color( 0.748, 0.4675, 0.85, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionPolygon2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LaserLights/Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 1.6, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LaserLights/Light2D2:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 1.6, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("LaserLights/Light2D3:energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 1.6, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("LaserLights/Light2D4:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 1.7, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("LaserLights/Light2D:enabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("LaserLights/Light2D3:enabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("LaserLights/Light2D2:enabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("LaserLights/Light2D4:enabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[node name="Boss" type="RigidBody2D" groups=[
+"boss",
+"enemies",
+]]
+modulate = Color( 0.992157, 0.992157, 0.992157, 1 )
+collision_layer = 128
+collision_mask = 51
+mode = 1
+physics_material_override = SubResource( 1 )
+can_sleep = false
+script = ExtResource( 1 )
+drop_help = true
+laser_shoot_rate = 5.0
+cannon_shoot_rate = 2.8
+can_shoot_spray = true
+spray_shoot_rate = 3.5
+spray_delay = 0.075
+bullets_array = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ]
+aim_at_player = false
+drop_array = [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ) ]
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_top = -83.8391
+margin_right = 64.0
+margin_bottom = -68.8391
+rect_pivot_offset = Vector2( 63.9922, 83.8391 )
+step = 0.5
+value = 100.0
+texture_under = SubResource( 3 )
+texture_progress = SubResource( 5 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="HealthBar"]
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.748, 0.4675, 0.85, 1 )
+show_behind_parent = true
+material = SubResource( 9 )
+texture = ExtResource( 2 )
+normal_map = ExtResource( 11 )
+
+[node name="LaserBeam1" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( -231.26, 62.6991 )
+rotation = 1.5708
+
+[node name="LaserBeam2" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( -67.4094, 112.758 )
+rotation = 1.5708
+
+[node name="LaserBeam3" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( 67.4094, 112.758 )
+rotation = 1.5708
+
+[node name="LaserBeam4" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( 231.93, 62.6991 )
+rotation = 1.5708
+
+[node name="LaserBeam5" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( -220.035, 4.33104 )
+rotation = 3.14159
+
+[node name="LaserBeam6" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( 221.266, 4.33104 )
+
+[node name="LaserBeam7" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( -132.483, -69.7514 )
+rotation = 3.14159
+
+[node name="LaserBeam8" type="Position2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( 132.592, -69.1902 )
+
+[node name="Cannon1" type="Position2D" parent="Sprite"]
+position = Vector2( -152.839, 91.4365 )
+rotation = 1.5708
+
+[node name="Cannon2" type="Position2D" parent="Sprite"]
+position = Vector2( 0, 58.0656 )
+rotation = 1.5708
+
+[node name="Cannon3" type="Position2D" parent="Sprite"]
+position = Vector2( 151.504, 91.4365 )
+rotation = 1.5708
+
+[node name="Spray1" type="Position2D" parent="Sprite"]
+position = Vector2( -111.171, -56.7773 )
+rotation = 2.56308
+
+[node name="Spray2" type="Position2D" parent="Sprite"]
+position = Vector2( -105.255, -52.5907 )
+rotation = 2.05646
+
+[node name="Spray3" type="Position2D" parent="Sprite"]
+position = Vector2( -92.498, -46.1139 )
+rotation = 1.79689
+
+[node name="Spray4" type="Position2D" parent="Sprite"]
+position = Vector2( -86.2712, -46.6751 )
+rotation = 1.57388
+
+[node name="Spray5" type="Position2D" parent="Sprite"]
+position = Vector2( -75.8654, -52.5907 )
+rotation = 1.29899
+
+[node name="Spray6" type="Position2D" parent="Sprite"]
+position = Vector2( -70.9658, -54.5324 )
+rotation = 0.801962
+
+[node name="Spray7" type="Position2D" parent="Sprite"]
+position = Vector2( 71.2292, -54.5323 )
+rotation = 2.26146
+
+[node name="Spray8" type="Position2D" parent="Sprite"]
+position = Vector2( 77.1451, -50.3457 )
+rotation = 1.9114
+
+[node name="Spray9" type="Position2D" parent="Sprite"]
+position = Vector2( 89.902, -43.8689 )
+rotation = 1.5399
+
+[node name="Spray10" type="Position2D" parent="Sprite"]
+position = Vector2( 96.1289, -44.4302 )
+rotation = 1.27281
+
+[node name="Spray11" type="Position2D" parent="Sprite"]
+position = Vector2( 106.535, -50.3457 )
+rotation = 0.937435
+
+[node name="Spray12" type="Position2D" parent="Sprite"]
+position = Vector2( 111.434, -52.2874 )
+rotation = 0.547509
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 0.94397, 75.5099 )
+build_mode = 1
+polygon = PoolVector2Array( 44.6742, -10.1696, -3.46344, 3.04468, -42.1623, -13.9451, -50.6571, 4.9324, -52.5449, 38.9119, -80.8611, 37.0241, -79.9172, -5.4502, -56.3204, -20.5522, -86.5244, -40.3735, -94.0753, -7.33795, -99.7386, 9.65179, -115.784, 27.5854, -158.259, 41.7435, -209.228, 19.0905, -216.779, -17.7206, -251.702, -12.0573, -249.815, -36.5981, -239.432, -59.251, -226.218, -72.4653, -202.621, -80.9601, -178.08, -87.5673, -140.325, -88.5111, -107.29, -59.251, -84.6366, -59.251, -62.9275, -95.1183, -24.2287, -132.873, -18.5654, -174.404, -56.3204, -152.695, -54.4326, -135.705, -78.9734, -121.547, -102.57, -116.827, -118.616, -128.154, -136.55, -145.144, -128.999, -176.291, -105.402, -185.73, -78.0295, -186.674, -55.3765, -168.74, -11.0144, -192.337, -11.0144, -134.761, 8.80695, -135.705, 15.4141, -188.562, 62.6078, -172.516, 76.7659, -186.674, 97.5311, -185.73, 122.072, -174.404, 132.454, -142.312, 115.465, -124.378, 92.8118, -115.883, 71.1027, -121.547, 48.4496, -142.312, 56.9445, -160.246, 23.9089, -174.404, 22.0212, -131.929, 68.271, -87.5673, 81.4853, -60.1949, 106.026, -61.1388, 140.005, -86.6234, 159.827, -90.3989, 195.694, -84.7356, 223.066, -74.353, 241.944, -57.3633, 249.495, -12.0573, 219.291, -10.1696, 204.189, 16.2589, 182.48, 33.2487, 137.174, 40.7997, 97.5311, 13.4273, 91.8679, -18.6644, 81.4853, -35.6542, 58.8323, -22.4399, 83.373, -6.39407, 87.1485, 37.968, 53.169, 34.1925, 56.0007, -8.28183 )
+
+[node name="LaserLights" type="Node2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="LaserLights"]
+position = Vector2( -67.6465, 121.257 )
+rotation = 1.74846e-07
+scale = Vector2( 0.8, 0.8 )
+enabled = false
+texture = ExtResource( 6 )
+color = Color( 1, 0, 0, 1 )
+energy = 0.0
+range_layer_min = -100
+range_layer_max = 1
+
+[node name="Light2D3" type="Light2D" parent="LaserLights"]
+position = Vector2( 67.1724, 121.257 )
+rotation = 1.74846e-07
+scale = Vector2( 0.8, 0.8 )
+enabled = false
+texture = ExtResource( 6 )
+color = Color( 1, 0, 0, 1 )
+energy = 0.0
+range_layer_min = -100
+range_layer_max = 1
+
+[node name="Light2D2" type="Light2D" parent="LaserLights"]
+position = Vector2( -232.049, 72.8661 )
+rotation = 1.74846e-07
+scale = Vector2( 0.8, 0.8 )
+enabled = false
+texture = ExtResource( 6 )
+color = Color( 1, 0, 0, 1 )
+energy = 0.0
+range_layer_min = -100
+range_layer_max = 1
+
+[node name="Light2D4" type="Light2D" parent="LaserLights"]
+position = Vector2( 232.475, 72.8662 )
+rotation = 1.74846e-07
+scale = Vector2( 0.8, 0.8 )
+enabled = false
+texture = ExtResource( 6 )
+color = Color( 1, 0, 0, 1 )
+energy = 0.0
+range_layer_min = -100
+range_layer_max = 1
+
+[node name="BackLight" type="Light2D" parent="."]
+show_behind_parent = true
+scale = Vector2( 2.25, 1.06641 )
+texture = ExtResource( 6 )
+energy = 2.0
+range_layer_min = -100
+range_layer_max = -1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+method_call_mode = 1
+anims/die = SubResource( 10 )
+anims/laser_load = SubResource( 11 )
+
+[node name="SidewaysTween" type="Tween" parent="."]
+
+[node name="AimPlayerTween" type="Tween" parent="."]
+
+[node name="LaserCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="CannonCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="SprayCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="SprayDelay" type="Timer" parent="."]
+wait_time = 0.075
+one_shot = true
+
+[node name="SideTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DropTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true

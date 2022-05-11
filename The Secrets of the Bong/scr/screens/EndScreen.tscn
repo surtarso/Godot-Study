@@ -1,0 +1,460 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://scr/userinterface/QuitButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/objects/lighter.png" type="Texture" id=2]
+[ext_resource path="res://scr/screens/EndScreen.gd" type="Script" id=3]
+[ext_resource path="res://assets/player/player.png" type="Texture" id=4]
+[ext_resource path="res://scr/userinterface/ChangeSceneButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/music/end_stage_theme.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/userinterface/game_icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/enviroment/bong.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/objects/bong.png" type="Texture" id=9]
+[ext_resource path="res://assets/enviroment/punch.wav" type="AudioStream" id=10]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 128, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=26]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "drag",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "jumping",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": true,
+"name": "sliding",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "running",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 25 ) ],
+"loop": true,
+"name": "idle_jump",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=29]
+resource_name = "fade in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("fadein:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("fadein:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "warning_blink"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("background/WarningLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=28]
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("background/game_icon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.7, 0.9, 1.1, 1.2 ),
+"transitions": PoolRealArray( 1, 0.378929, 0.406126, 1 ),
+"update": 0,
+"values": [ Vector2( 16.4384, 16.4384 ), Vector2( 16.4384, 16.4384 ), Vector2( 4.11297, 4.11297 ), Vector2( 4.44, 4.44 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("background/lighter:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.3, 1.5, 1.7, 1.8 ),
+"transitions": PoolRealArray( 1, 0.34151, 0.406126, 1 ),
+"update": 0,
+"values": [ Vector2( 38.3429, 44.3484 ), Vector2( 38.3429, 44.3484 ), Vector2( 7.17222, 8.29558 ), Vector2( 7.6, 8.79036 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("background/lighter:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.4, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("background/game_icon:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("background/bong:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.9, 2.1, 2.3, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 20.8053, 20.8053 ), Vector2( 20.8053, 20.8053 ), Vector2( 4.69616, 4.69616 ), Vector2( 5.2235, 5.2235 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("background/bong:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("punch:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1, 1.6, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true ]
+}
+
+[node name="EndScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.360784, 0.25098, 0.25098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 405.471
+margin_top = 236.458
+margin_right = 405.471
+margin_bottom = 236.458
+rect_scale = Vector2( 0.206289, 0.277048 )
+color = Color( 0.294118, 0.207843, 0.207843, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="game_icon" type="Sprite" parent="background"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 200.629, 190.312 )
+rotation = -0.261799
+scale = Vector2( 16.4384, 16.4384 )
+texture = ExtResource( 7 )
+
+[node name="lighter" type="Sprite" parent="background"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 202.828, 417.53 )
+rotation = 0.261799
+scale = Vector2( 7.6, 8.79036 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="bong" type="Sprite" parent="background"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 822.322, 275.466 )
+rotation = 0.0499589
+scale = Vector2( 5.2235, 5.2235 )
+texture = ExtResource( 9 )
+
+[node name="WarningLabel" type="RichTextLabel" parent="background"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -31.8921
+margin_right = 200.0
+margin_bottom = -11.8921
+text = "NO PIGS WERE HARMED DURING THE MAKING OF THIS GAME."
+scroll_active = false
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.5
+margin_top = 155.03
+margin_right = 75.5
+margin_bottom = 235.03
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChanceSceneButton" parent="Menu" instance=ExtResource( 5 )]
+modulate = Color( 0.372549, 0.784314, 0.372549, 1 )
+margin_right = 151.0
+margin_bottom = 20.0
+text = "Next Stage"
+
+[node name="MainScreenButton" parent="Menu" instance=ExtResource( 5 )]
+margin_top = 30.0
+margin_right = 151.0
+margin_bottom = 50.0
+text = "Back to Main Screen"
+next_scene = "res://scr/screens/MainScreen.tscn"
+
+[node name="QuitButton" parent="Menu" instance=ExtResource( 1 )]
+margin_top = 60.0
+margin_right = 151.0
+margin_bottom = 80.0
+
+[node name="Score" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -76.2614
+margin_top = -109.783
+margin_right = 48.7386
+margin_bottom = 40.217
+rect_scale = Vector2( 1.2, 1.2 )
+custom_colors/font_color = Color( 0.815686, 0.815686, 0.815686, 1 )
+custom_colors/font_color_shadow = Color( 0.380392, 0.164706, 0.188235, 1 )
+text = "%s
+STAGE TIME
+
+
+STATS:
+%s time(s) arrested
+%s pig(s) bribed
+%s pig(s) stoned
+%s roach(es) left"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StageTitle" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.6729
+margin_top = -231.624
+margin_right = 24.3271
+margin_bottom = -217.624
+rect_scale = Vector2( 1.5, 1.5 )
+custom_colors/font_color = Color( 0.815686, 0.815686, 0.815686, 1 )
+custom_colors/font_color_shadow = Color( 0.380392, 0.164706, 0.188235, 1 )
+text = "STAGE CLEAR"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="StageTitle"]
+position = Vector2( 49.4584, 44.458 )
+scale = Vector2( 1.98667, 1.98667 )
+frames = SubResource( 26 )
+animation = "jumping"
+frame = 1
+playing = true
+
+[node name="end_stage_theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Music"
+
+[node name="bong_hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = 4.0
+
+[node name="punch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/fade in" = SubResource( 29 )
+anims/warning_blink = SubResource( 27 )
+anims/weed_lighter = SubResource( 28 )
+
+[node name="fadein" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

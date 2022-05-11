@@ -1,0 +1,1093 @@
+[gd_scene load_steps=113 format=2]
+
+[ext_resource path="res://scr/actors/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/player/player.png" type="Texture" id=2]
+[ext_resource path="res://assets/sky/sky256x256.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/player_run.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/player/player_idle.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/player/player_jump.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/player/player_walljump.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/player/player_overdose.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sky/sky[T]256x256.png" type="Texture" id=9]
+[ext_resource path="res://assets/sky/sky[T2]256x256.png" type="Texture" id=10]
+[ext_resource path="res://assets/sky/blood moon.png" type="Texture" id=11]
+[ext_resource path="res://scr/actors/Camera2D.gd" type="Script" id=12]
+[ext_resource path="res://assets/sky/moon-nor-512.png" type="Texture" id=13]
+[ext_resource path="res://assets/player/player_suit.png" type="Texture" id=14]
+[ext_resource path="res://assets/player/player_suit.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/userinterface/game_icon.png" type="Texture" id=16]
+[ext_resource path="res://assets/enviroment/smoke2.png" type="Texture" id=17]
+[ext_resource path="res://scr/actors/BlowsmokeRaycast.gd" type="Script" id=18]
+[ext_resource path="res://assets/objects/coffee.png" type="Texture" id=19]
+[ext_resource path="res://assets/player/circle_leaf.png" type="Texture" id=20]
+[ext_resource path="res://scr/actors/IdleSmokeParticles.gd" type="Script" id=21]
+[ext_resource path="res://scr/actors/WeedSmellParticles.gd" type="Script" id=22]
+[ext_resource path="res://scr/actors/blink_cd_indicator.gd" type="Script" id=23]
+[ext_resource path="res://assets/player/player_blink.wav" type="AudioStream" id=24]
+[ext_resource path="res://scr/actors/suit_duration_indicator.gd" type="Script" id=25]
+[ext_resource path="res://assets/objects/roach.png" type="Texture" id=26]
+[ext_resource path="res://assets/objects/suit.png" type="Texture" id=27]
+[ext_resource path="res://assets/player/player_blowsmoke.wav" type="AudioStream" id=28]
+[ext_resource path="res://assets/player/player_blowsmoke2.wav" type="AudioStream" id=29]
+[ext_resource path="res://assets/player/player_blowsmoke3.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/player/player_blowsmoke1.wav" type="AudioStream" id=31]
+[ext_resource path="res://scr/actors/WalkDustParticles.gd" type="Script" id=32]
+[ext_resource path="res://assets/player/player_land.wav" type="AudioStream" id=33]
+[ext_resource path="res://scr/actors/AimParticles.gd" type="Script" id=34]
+[ext_resource path="res://assets/enviroment/light.png" type="Texture" id=35]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 14 )
+region = Rect2( 64, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 14 )
+region = Rect2( 96, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 14 )
+region = Rect2( 128, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 14 )
+region = Rect2( 96, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 14 )
+region = Rect2( 128, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 14 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 14 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 14 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 14 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 14 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 14 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 14 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 14 )
+region = Rect2( 64, 128, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=49]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "sliding_suit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "jumping_suit",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": false,
+"name": "jumping",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 16 ) ],
+"loop": true,
+"name": "sliding",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "idle_suit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "running_suit",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
+"loop": true,
+"name": "running",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 47 ) ],
+"loop": true,
+"name": "idle_jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 48 ) ],
+"loop": true,
+"name": "idle_jump_suit",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 26 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 26 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 26 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 26 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=54]
+animations = [ {
+"frames": [ SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
+"loop": true,
+"name": "default",
+"speed": 9.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=55]
+radius = 8.09658
+height = 11.6746
+
+[sub_resource type="Animation" id=80]
+resource_name = "fadein"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.172549, 0.0509804, 0.0901961, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../../../CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.666667, 0.376471, 0.376471, 0.317647 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=58]
+extents = Vector2( 9.44767, 1.37514 )
+
+[sub_resource type="Curve" id=59]
+max_value = 100.0
+_data = [ Vector2( 0.729885, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 90 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=60]
+_data = [ Vector2( 0.00342465, 0.0455189 ), 0.0, 0.0, 0, 0, Vector2( 0.599315, 0.190973 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.563701 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=61]
+offsets = PoolRealArray( 0.0119048, 0.0662252, 0.549669, 0.781457, 1 )
+colors = PoolColorArray( 0.655762, 0.210049, 0.210049, 1, 0.360784, 0.360784, 0.360784, 0.392157, 0.596078, 0.596078, 0.596078, 0.25098, 0.788235, 0.788235, 0.788235, 0.0941176, 0.964706, 0.964706, 0.964706, 0 )
+
+[sub_resource type="Curve" id=62]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, -65.4545 ), 0.0, 0.0, 0, 0, Vector2( 1, 45.8182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=63]
+_data = [ Vector2( 0, 0.228409 ), 0.0, 0.0, 0, 0, Vector2( 0.298851, 0.628409 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=64]
+offsets = PoolRealArray( 0, 0.649007, 1 )
+colors = PoolColorArray( 0.399651, 0.445312, 0.372253, 1, 0.941176, 0.94902, 0.917647, 0.584314, 1, 1, 1, 0 )
+
+[sub_resource type="Curve" id=65]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.293269, 17.6351 ), 0.0, 0.0, 0, 0, Vector2( 1, 100 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=66]
+_data = [ Vector2( 0.0144231, 0.967045 ), 0.0, 0.0, 0, 0, Vector2( 0.615385, 0.605682 ), -0.773554, -0.773554, 0, 0, Vector2( 0.985577, 0.0965909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=67]
+colors = PoolColorArray( 0.197255, 0.304688, 0.178528, 1, 0.50116, 0.796875, 0.519642, 0.592157 )
+
+[sub_resource type="Gradient" id=68]
+colors = PoolColorArray( 0.296875, 0.296875, 0.296875, 1, 0.686275, 0.686275, 0.686275, 0.854902 )
+
+[sub_resource type="Gradient" id=69]
+colors = PoolColorArray( 0.175781, 0.0809437, 0.00480652, 1, 0.607843, 0.431373, 0.0901961, 0.898039 )
+
+[sub_resource type="Gradient" id=70]
+offsets = PoolRealArray( 0, 0.460967, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.23584, 0.114184, 0.0285587, 0.862745, 0.29834, 0.213916, 0.0221424, 0.584314 )
+
+[sub_resource type="Curve" id=79]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 100 ), -444.452, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=72]
+_data = [ Vector2( 0, 0.240909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), -1.26559, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=73]
+offsets = PoolRealArray( 0, 0.104089, 0.535316, 1 )
+colors = PoolColorArray( 0.453125, 0.453125, 0.453125, 1, 0.34375, 0.34375, 0.34375, 1, 0.780392, 0.780392, 0.780392, 0.792157, 0.454902, 0.454902, 0.454902, 0.529412 )
+
+[sub_resource type="Curve" id=74]
+max_value = 2.0
+_data = [ Vector2( 0, 2 ), 0.0, -1.25, 0, 1, Vector2( 1, 0.75 ), -1.25, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=75]
+offsets = PoolRealArray( 0, 0.231638, 1 )
+colors = PoolColorArray( 0.140991, 0.515625, 0.128906, 1, 0.364706, 0.364706, 0.364706, 0.898039, 0.192157, 0.192157, 0.192157, 0.819608 )
+
+[sub_resource type="Animation" id=76]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("coffee:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 1.4 ),
+"transitions": PoolRealArray( 1, 0.353553 ),
+"update": 0,
+"values": [ Vector2( -0.165455, -37.3896 ), Vector2( -0.165, -55 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("coffee:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 15.455 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("coffee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("coffee:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 0.0743257 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 1, 1 ), Vector2( 0.3, 0.3 ) ]
+}
+
+[sub_resource type="Animation" id=77]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("roach:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 2 ),
+"transitions": PoolRealArray( 1, 0.353553 ),
+"update": 0,
+"values": [ Vector2( -0.165455, -37.3896 ), Vector2( -0.165, -55 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("roach:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8, 2 ),
+"transitions": PoolRealArray( 1, 15.455 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("roach:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("roach:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 0.0743257 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 1, 1 ), Vector2( 0.3, 0.3 ) ]
+}
+
+[sub_resource type="Animation" id=78]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("suit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 1.4 ),
+"transitions": PoolRealArray( 1, 0.353553 ),
+"update": 0,
+"values": [ Vector2( -0.165455, -37.3896 ), Vector2( -0.165, -55 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("suit:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 15.455 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("suit:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("suit:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 0.0743257 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 1, 1 ), Vector2( 0.3, 0.3 ) ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+collision_mask = 30
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 69.6116 ]
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -16 )
+frames = SubResource( 49 )
+animation = "idle"
+frame = 3
+playing = true
+
+[node name="WeedJoint" type="AnimatedSprite" parent="Sprite"]
+visible = false
+show_behind_parent = true
+position = Vector2( 15, -5.5 )
+rotation = -0.645772
+scale = Vector2( 0.314979, 0.314979 )
+frames = SubResource( 54 )
+frame = 1
+playing = true
+flip_h = true
+
+[node name="WorldCollisionShape" type="CollisionShape2D" parent="."]
+modulate = Color( 0.701961, 0.439216, 0.439216, 1 )
+position = Vector2( 0, -14 )
+shape = SubResource( 55 )
+
+[node name="BlowRaycasts" type="Node2D" parent="."]
+
+[node name="BlowsmokeRaycast" type="RayCast2D" parent="BlowRaycasts"]
+position = Vector2( 0, -26 )
+cast_to = Vector2( 0, 0 )
+collision_mask = 18
+script = ExtResource( 18 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -64 )
+current = true
+zoom = Vector2( 0.4, 0.4 )
+process_mode = 0
+limit_left = 0
+limit_top = 0
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+drag_margin_left = 0.1
+drag_margin_top = 0.3
+drag_margin_right = 0.1
+drag_margin_bottom = 0.05
+script = ExtResource( 12 )
+
+[node name="Background" type="ParallaxBackground" parent="."]
+layer = -2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Background"]
+color = Color( 0.666667, 0.376471, 0.376471, 0.317647 )
+
+[node name="sky_bg" type="CanvasLayer" parent="Background"]
+layer = -3
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background/sky_bg"]
+layer = -3
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/sky_bg/ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 512, 256 )
+
+[node name="skybg" type="ColorRect" parent="Background/sky_bg/ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.427451, 0.203922, 0.345098, 0.866667 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 512.0
+margin_bottom = 256.0
+color = Color( 0.172549, 0.0509804, 0.0901961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/sky_bg/ParallaxBackground/ParallaxLayer/skybg"]
+autoplay = "fadein"
+anims/fadein = SubResource( 80 )
+
+[node name="moon" type="ParallaxLayer" parent="Background"]
+z_index = -5
+motion_scale = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="Background/moon"]
+modulate = Color( 0.431373, 0.215686, 0.215686, 1 )
+position = Vector2( -128, -63 )
+scale = Vector2( 0.8, 0.8 )
+z_index = -5
+texture = ExtResource( 11 )
+normal_map = ExtResource( 13 )
+centered = false
+offset = Vector2( 32, -128 )
+region_rect = Rect2( 0, 0, 512, 256 )
+
+[node name="clouds3" type="ParallaxLayer" parent="Background"]
+modulate = Color( 1, 0.705882, 0.654902, 1 )
+motion_scale = Vector2( 0.1, 0.1 )
+motion_mirroring = Vector2( 512, 256 )
+
+[node name="Sprite2" type="Sprite" parent="Background/clouds3"]
+modulate = Color( 0.501961, 0.337255, 0.337255, 1 )
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 256 )
+
+[node name="clouds2" type="ParallaxLayer" parent="Background"]
+modulate = Color( 0.666667, 0.372549, 0.32549, 1 )
+motion_scale = Vector2( 0.15, 0.15 )
+motion_mirroring = Vector2( 512, 256 )
+
+[node name="Sprite" type="Sprite" parent="Background/clouds2"]
+modulate = Color( 0.509804, 0.439216, 0.439216, 1 )
+texture = ExtResource( 9 )
+centered = false
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 256 )
+
+[node name="clouds" type="ParallaxLayer" parent="Background"]
+modulate = Color( 0.568627, 0.231373, 0.176471, 1 )
+motion_scale = Vector2( 0.3, 0.3 )
+motion_mirroring = Vector2( 512, 256 )
+
+[node name="Sprite" type="Sprite" parent="Background/clouds"]
+modulate = Color( 0.501961, 0.352941, 0.305882, 1 )
+texture = ExtResource( 10 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 256 )
+
+[node name="BlinkDetector" type="Area2D" parent="."]
+collision_layer = 2147483650
+collision_mask = 2147483650
+
+[node name="hitbox" type="CollisionShape2D" parent="BlinkDetector"]
+position = Vector2( 80, 0 )
+shape = SubResource( 58 )
+
+[node name="walldetector" type="RayCast2D" parent="BlinkDetector"]
+position = Vector2( 0, -5 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 0 )
+collision_mask = 2
+collide_with_areas = true
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="IdleSmokeParticles" type="CPUParticles2D" parent="Particles"]
+position = Vector2( 1, -26.4307 )
+emitting = false
+amount = 500
+lifetime = 4.0
+speed_scale = 0.35
+explosiveness = 0.05
+randomness = 0.4
+lifetime_randomness = 0.2
+local_coords = false
+texture = ExtResource( 17 )
+emission_shape = 1
+emission_sphere_radius = 0.05
+direction = Vector2( 0, -1 )
+spread = 22.0
+gravity = Vector2( 0, -20 )
+initial_velocity = 25.0
+initial_velocity_random = 0.22
+angular_velocity = -15.48
+angular_velocity_random = 0.13
+linear_accel = -15.0
+linear_accel_random = 0.02
+radial_accel = -8.5
+radial_accel_random = 0.5
+tangential_accel = -2.15
+tangential_accel_random = 0.78
+damping = 4.0
+damping_random = 0.05
+damping_curve = SubResource( 59 )
+angle = -720.0
+angle_random = 1.0
+scale_amount = 0.02
+scale_amount_curve = SubResource( 60 )
+color_ramp = SubResource( 61 )
+script = ExtResource( 21 )
+
+[node name="Light2D" type="Light2D" parent="Particles/IdleSmokeParticles"]
+enabled = false
+texture = ExtResource( 35 )
+texture_scale = 0.3
+color = Color( 0.858824, 0.419608, 0.0627451, 1 )
+
+[node name="WeedSmellParticles" type="CPUParticles2D" parent="Particles"]
+show_behind_parent = true
+position = Vector2( -0.0511246, -8.87699 )
+emitting = false
+amount = 105
+lifetime = 3.0
+speed_scale = 0.4
+randomness = 0.5
+lifetime_randomness = 0.1
+local_coords = false
+texture = ExtResource( 16 )
+emission_shape = 1
+emission_sphere_radius = 15.0
+direction = Vector2( 0, -1 )
+spread = 105.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 0.5
+angular_velocity = -14.52
+angular_velocity_random = 0.08
+angular_velocity_curve = SubResource( 62 )
+linear_accel = 1.0
+linear_accel_random = 0.03
+radial_accel = -8.6
+radial_accel_random = 0.18
+tangential_accel = 1.0
+tangential_accel_random = 1.0
+damping = 15.0
+damping_random = 0.1
+angle_random = 0.17
+scale_amount = 0.35
+scale_amount_random = 0.15
+scale_amount_curve = SubResource( 63 )
+color_ramp = SubResource( 64 )
+script = ExtResource( 22 )
+
+[node name="BlinkPuff" type="CPUParticles2D" parent="Particles"]
+show_behind_parent = true
+position = Vector2( 0, -15.8919 )
+z_index = -1
+emitting = false
+amount = 300
+lifetime = 0.8
+one_shot = true
+speed_scale = 2.0
+lifetime_randomness = 1.0
+local_coords = false
+draw_order = 1
+emission_shape = 2
+emission_rect_extents = Vector2( 0, 8 )
+direction = Vector2( 0, -1 )
+spread = 90.0
+gravity = Vector2( 0, 0 )
+initial_velocity_random = 0.01
+angular_velocity = 720.0
+angular_velocity_random = 0.22
+linear_accel = 100.0
+linear_accel_random = 0.08
+radial_accel_random = 0.1
+damping_curve = SubResource( 65 )
+angle = 720.0
+scale_amount_curve = SubResource( 66 )
+color_ramp = SubResource( 67 )
+
+[node name="WalkDustParticles" type="CPUParticles2D" parent="Particles"]
+show_behind_parent = true
+position = Vector2( 0, -2 )
+z_index = -1
+amount = 15
+lifetime = 0.4
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 3.0
+flag_align_y = true
+direction = Vector2( 0, 0 )
+gravity = Vector2( 0, -0.01 )
+initial_velocity_random = 0.01
+linear_accel_random = 0.08
+radial_accel_random = 0.1
+damping_curve = SubResource( 65 )
+scale_amount_curve = SubResource( 66 )
+color_ramp = SubResource( 68 )
+script = ExtResource( 32 )
+
+[node name="JumpLandParticles" type="CPUParticles2D" parent="Particles"]
+show_behind_parent = true
+position = Vector2( 0, -1.5 )
+z_index = -1
+emitting = false
+amount = 50
+lifetime = 0.2
+one_shot = true
+speed_scale = 0.6
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2( 0, -1 )
+spread = 0.0
+gravity = Vector2( 0, -50 )
+initial_velocity = 0.5
+damping_curve = SubResource( 65 )
+scale_amount_curve = SubResource( 66 )
+color_ramp = SubResource( 69 )
+
+[node name="CoffeeSpeed" type="CPUParticles2D" parent="Particles"]
+show_behind_parent = true
+position = Vector2( 0, -16 )
+emitting = false
+amount = 2000
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.01
+randomness = 0.01
+local_coords = false
+draw_order = 1
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, -15 )
+initial_velocity = 40.0
+initial_velocity_random = 0.01
+angular_velocity = -85.26
+angular_velocity_random = 0.22
+linear_accel = -17.11
+linear_accel_random = 0.08
+radial_accel = -28.95
+radial_accel_random = 0.1
+damping_curve = SubResource( 65 )
+angle = 720.0
+scale_amount_curve = SubResource( 66 )
+color_ramp = SubResource( 70 )
+
+[node name="BlowSmoke" type="CPUParticles2D" parent="Particles"]
+position = Vector2( 0, -25 )
+rotation = -4.71239
+emitting = false
+amount = 150
+lifetime = 0.75
+one_shot = true
+speed_scale = 3.0
+fixed_fps = 60
+local_coords = false
+texture = ExtResource( 17 )
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector2( 0, 0 )
+spread = 4.09
+gravity = Vector2( 0, -25 )
+initial_velocity = 185.47
+initial_velocity_random = 0.38
+angular_velocity = 720.0
+angular_velocity_random = 0.47
+damping = 100.0
+damping_curve = SubResource( 79 )
+scale_amount = 0.03
+scale_amount_curve = SubResource( 72 )
+color_ramp = SubResource( 73 )
+
+[node name="AimParticles" type="CPUParticles2D" parent="Particles"]
+position = Vector2( 0, -26 )
+scale = Vector2( 0.399999, 0.399999 )
+z_index = 100
+emitting = false
+amount = 5
+lifetime = 0.25
+local_coords = false
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+damping = 1.0
+scale_amount_curve = SubResource( 74 )
+color_ramp = SubResource( 75 )
+script = ExtResource( 34 )
+
+[node name="AimLight" type="Light2D" parent="Particles/AimParticles"]
+enabled = false
+texture = ExtResource( 35 )
+texture_scale = 0.5
+range_layer_min = -100
+range_layer_max = 100
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="player_run" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 4 )
+pitch_scale = 0.65
+bus = "Effects"
+
+[node name="player_idle" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 5 )
+volume_db = 10.0
+bus = "Effects"
+
+[node name="player_jump1" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 6 )
+volume_db = -2.0
+bus = "Effects"
+
+[node name="player_jump2" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 7 )
+volume_db = -8.0
+bus = "Effects"
+
+[node name="player_overdose" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 8 )
+bus = "Effects"
+
+[node name="player_suit" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 15 )
+pitch_scale = 0.98
+bus = "Effects"
+
+[node name="player_blink" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 24 )
+volume_db = -8.0
+pitch_scale = 1.1
+bus = "Effects"
+
+[node name="player_blowsmoke" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 28 )
+bus = "Effects"
+
+[node name="player_blowsmoke1" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 31 )
+bus = "Effects"
+
+[node name="Player_blowsmoke2" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 29 )
+bus = "Effects"
+
+[node name="player_blowsmoke3" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 30 )
+bus = "Effects"
+
+[node name="player_land" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 33 )
+volume_db = 20.0
+bus = "Effects"
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="blink_timer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="coffee_timer" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="suit_timer" type="Timer" parent="Timers"]
+wait_time = 9.7
+one_shot = true
+
+[node name="blow_smoke_timer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="coyote_jump" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
+
+[node name="blink_cd_indicator" type="TextureProgress" parent="Timers"]
+modulate = Color( 1, 0, 0, 0.6 )
+show_behind_parent = true
+margin_left = -5.74745
+margin_top = -41.0
+margin_right = 10.2526
+margin_bottom = -25.0
+rect_rotation = -45.0
+rect_scale = Vector2( 0.5, 0.5 )
+max_value = 2.0
+step = 0.2
+texture_progress = ExtResource( 20 )
+fill_mode = 5
+radial_initial_angle = 18.9
+radial_fill_degrees = 305.5
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="suit_duration_indicator" type="TextureProgress" parent="Timers"]
+modulate = Color( 1, 0.835294, 0, 0.588235 )
+margin_left = -9.08343
+margin_top = -41.416
+margin_right = 6.91657
+margin_bottom = -25.416
+rect_rotation = -45.0
+rect_scale = Vector2( 0.8, 0.8 )
+max_value = 9.7
+step = 0.1
+texture_progress = ExtResource( 20 )
+fill_mode = 4
+radial_initial_angle = 66.0
+radial_fill_degrees = 305.5
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="roach_timer" type="Timer" parent="Timers"]
+wait_time = 30.0
+one_shot = true
+
+[node name="ItemUsedAnimation" type="AnimationPlayer" parent="."]
+anims/coffee_gone = SubResource( 76 )
+anims/roach_gone = SubResource( 77 )
+anims/suit_gone = SubResource( 78 )
+
+[node name="coffee" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.25 )
+position = Vector2( -0.16507, -52.2907 )
+scale = Vector2( 0.475, 0.475 )
+texture = ExtResource( 19 )
+vframes = 3
+hframes = 2
+
+[node name="roach" type="Sprite" parent="."]
+visible = false
+position = Vector2( -0.165455, -37.3896 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 26 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="suit" type="Sprite" parent="."]
+visible = false
+position = Vector2( -0.165455, -37.3896 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 27 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/itemdrops/item_drop.png" type="Texture" id=1]
+[ext_resource path="res://scr/items/CritDrop.gd" type="Script" id=2]
+[ext_resource path="res://scr/items/ItemDropClass.tscn" type="PackedScene" id=3]
+
+
+[node name="CritDrop" instance=ExtResource( 3 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+self_modulate = Color( 8.09, 0, 1, 1 )
+material = null
+texture = ExtResource( 1 )
+region_enabled = true

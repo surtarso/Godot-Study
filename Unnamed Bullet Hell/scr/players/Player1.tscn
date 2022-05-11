@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scr/actors/PlayerClass.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scr/players/Player1.gd" type="Script" id=2]
+[ext_resource path="res://assets/player/player.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 3 ) ],
+"loop": false,
+"name": "shoot",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.00662252, 1 )
+colors = PoolColorArray( 0.0805625, 0.0805625, 0.0805625, 1, 0, 0, 0, 1, 0.243137, 0.243137, 0.243137, 0.960784 )
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.565891, 1 )
+colors = PoolColorArray( 0.476562, 1, 0, 1, 0, 0, 0, 1, 0.824219, 0.526934, 0.106247, 1 )
+
+[node name="Player1" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+disabled = true
+
+[node name="Sprite" parent="." index="4"]
+rotation = 1.5708
+frames = SubResource( 5 )
+
+[node name="CPUParticles2D" parent="Sprite" index="7"]
+color_ramp = SubResource( 6 )
+
+[node name="CPUParticles2D2" parent="Sprite" index="8"]
+color_ramp = SubResource( 7 )
+
+[node name="BlackHoleCdBar" parent="." index="5"]
+modulate = Color( 0.470588, 0.470588, 0.470588, 1 )

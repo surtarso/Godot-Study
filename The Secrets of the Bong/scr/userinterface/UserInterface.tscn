@@ -1,0 +1,334 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://scr/userinterface/QuitButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scr/userinterface/UserInterface.gd" type="Script" id=2]
+[ext_resource path="res://scr/userinterface/RetrySceneButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scr/userinterface/Title.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scr/userinterface/ChangeSceneButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/objects/coffee.png" type="Texture" id=6]
+[ext_resource path="res://assets/objects/weed.png" type="Texture" id=7]
+[ext_resource path="res://assets/objects/lighter.png" type="Texture" id=8]
+[ext_resource path="res://assets/userinterface/hourglass.png" type="Texture" id=9]
+[ext_resource path="res://assets/userinterface/player_arrest.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/userinterface/pause_menu.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/objects/suit.png" type="Texture" id=12]
+[ext_resource path="res://assets/objects/bong.png" type="Texture" id=13]
+[ext_resource path="res://assets/userinterface/joint.png" type="Texture" id=14]
+[ext_resource path="res://assets/userinterface/pause_music.wav" type="AudioStream" id=15]
+[ext_resource path="res://scr/userinterface/Settings.tscn" type="PackedScene" id=16]
+
+[sub_resource type="Animation" id=1]
+resource_name = "overdose"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("coffee_overdose_icon:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5, 2.7, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true, false, true, false, true, false, true, false, true, false ]
+}
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="UserInterface" type="Control"]
+pause_mode = 2
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreIcons" type="Node2D" parent="."]
+
+[node name="coffee_shadow" type="Sprite" parent="ScoreIcons"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+position = Vector2( 343.755, 48.3962 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="coffee_shadow2" type="Sprite" parent="ScoreIcons"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+position = Vector2( 384.755, 48.3962 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="coffee_shadow3" type="Sprite" parent="ScoreIcons"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+position = Vector2( 425.755, 48.3962 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="coffee_PHolder" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 343.125, 49.6561 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="coffee_PHolder2" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 384.125, 49.6561 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="coffee_PHolder3" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 425.125, 49.6561 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="lighter_shadow" type="Sprite" parent="ScoreIcons"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+position = Vector2( 76.7135, 58.3429 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="lighter_PHolder" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 76.7135, 58.3429 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="weed_shadow" type="Sprite" parent="ScoreIcons"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+position = Vector2( 120.081, 56.7719 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="weed_PHolder2" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 120.081, 56.7719 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 32, 32 )
+
+[node name="roach_bar" type="TextureProgress" parent="ScoreIcons"]
+margin_left = 568.119
+margin_top = 34.4581
+margin_right = 664.119
+margin_bottom = 66.4582
+rect_scale = Vector2( 1.25, 1.44 )
+texture_under = ExtResource( 14 )
+texture_progress = ExtResource( 14 )
+tint_under = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="suit_shadow" type="Sprite" parent="ScoreIcons"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+position = Vector2( 246.98, 56.3294 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="suit" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 245.98, 56.9193 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="bong_shadow" type="Sprite" parent="ScoreIcons"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 0.196078 )
+position = Vector2( 170.131, 49.9629 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 13 )
+
+[node name="bong" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 170.131, 49.9629 )
+scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 13 )
+
+[node name="coffee_animation" type="AnimationPlayer" parent="ScoreIcons"]
+anims/overdose = SubResource( 1 )
+
+[node name="coffee_overdose_icon" type="Sprite" parent="ScoreIcons"]
+visible = false
+position = Vector2( 507.314, 43.3994 )
+scale = Vector2( 2.26085, 2.26085 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="TimerDisplay" type="Label" parent="."]
+margin_left = 887.357
+margin_top = 50.5108
+margin_right = 927.357
+margin_bottom = 64.5108
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+margin_left = 599.821
+margin_top = 51.3791
+margin_right = 639.821
+margin_bottom = 65.3791
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 871.596, 55.7914 )
+texture = ExtResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="Sprite"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -28.0
+margin_right = 59.0
+margin_bottom = -3.0
+color = Color( 1, 1, 1, 0.211765 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.109804, 0.00392157, 0.00392157, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="weed" type="AnimatedSprite" parent="PauseOverlay"]
+position = Vector2( 512, 297.92 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 8 )
+frame = 5
+playing = true
+
+[node name="Title" parent="PauseOverlay" instance=ExtResource( 4 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = 26.7491
+margin_bottom = 57.7491
+text = "Game Paused
+Press ESC to resume"
+autowrap = true
+
+[node name="PauseMenu" type="VBoxContainer" parent="PauseOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = 114.472
+margin_right = 76.0
+margin_bottom = 224.472
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetrySceneButton" parent="PauseOverlay/PauseMenu" instance=ExtResource( 3 )]
+margin_right = 151.0
+margin_bottom = 20.0
+
+[node name="Settings" type="Button" parent="PauseOverlay/PauseMenu"]
+margin_top = 60.0
+margin_right = 151.0
+margin_bottom = 80.0
+text = "Settings"
+
+[node name="ChanceSceneButton" parent="PauseOverlay/PauseMenu" instance=ExtResource( 5 )]
+margin_top = 30.0
+margin_right = 151.0
+margin_bottom = 50.0
+text = "Back to Main Screen"
+next_scene = "res://scr/screens/MainScreen.tscn"
+
+[node name="QuitButton" parent="PauseOverlay/PauseMenu" instance=ExtResource( 1 )]
+margin_top = 90.0
+margin_right = 151.0
+margin_bottom = 110.0
+
+[node name="Settings" parent="PauseOverlay" instance=ExtResource( 16 )]
+visible = false
+margin_left = -336.739
+margin_top = -545.517
+margin_right = -336.739
+margin_bottom = -545.517
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="player_gameover" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -15.0
+bus = "Effects"
+
+[node name="pause_menu" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+bus = "Effects"
+
+[node name="pause_music" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+bus = "Music"
+[connection signal="button_up" from="PauseOverlay/PauseMenu/Settings" to="." method="_on_Settings_button_up"]

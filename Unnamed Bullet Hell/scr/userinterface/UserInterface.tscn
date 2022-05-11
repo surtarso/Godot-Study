@@ -1,0 +1,523 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scr/userinterface/UserInterface.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/quithover.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/quit.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/continue.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/levelselecthover.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/retry.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/continuehover.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/levelselect.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/retryhover.png" type="Texture" id=9]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.525362, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.117647, 0, 0, 0, 0.588235, 1, 1, 1, 0.117647 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 500
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.521739, 1 )
+colors = PoolColorArray( 0.0886052, 0.929688, 0.0399475, 1, 0.984375, 0.0115356, 0.0115356, 1, 0.182819, 0.9375, 0.0512695, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 500
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.00362319 )
+colors = PoolColorArray( 0.482422, 0.482422, 0.482422, 1, 0.375, 0.375, 0.375, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+width = 500
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.507246, 1 )
+colors = PoolColorArray( 0, 0.905882, 1, 0.588235, 0, 0.484375, 1, 1, 0, 0.882353, 1, 0.588235 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+width = 500
+
+[sub_resource type="Shader" id=9]
+code = "// Fireworks shader
+// Based on shadertoy shader by Martijn Steinrucken aka BigWings - 2015 
+// (https://www.shadertoy.com/view/lscGRl)
+
+shader_type canvas_item;
+
+uniform float PI = 3.141592653589793238;
+uniform float TWOPI = 6.283185307179586 ;
+uniform float NUM_EXPLOSIONS = 8.0;
+uniform float NUM_PARTICLES = 70.0;
+
+// Noise functions by Dave Hoskins
+
+uniform vec3 MOD3 = vec3(0.1031,0.11369,0.13787);
+
+vec3 hash31(float p) {
+   vec3 p3 = fract(vec3(p) * MOD3);
+   p3 += dot(p3, p3.yzx + 19.19);
+   return fract(vec3((p3.x + p3.y)*p3.z, (p3.x+p3.z)*p3.y, (p3.y+p3.z)*p3.x));
+}
+
+float hash12(vec2 p) // attention changement vec2 p en vec3
+{
+                vec3 p3  = fract(vec3(p.xy, 0.0) * MOD3);
+    p3 += dot(p3, p3.yzx + 19.19);
+    return fract((p3.x + p3.y) * p3.z);
+}
+
+float circ(vec2 uv, vec2 pos, float size) {
+                uv -= pos;
+    
+    size *= size;
+    return smoothstep(size*1.1, size, dot(uv, uv));
+}
+
+float lighter(vec2 uv, vec2 pos, float size) {
+    uv -= pos;
+    size *= size;
+    return size/dot(uv, uv);
+}
+
+vec3 explosion(vec2 uv, vec2 p, float seed, float t) {
+                
+    vec3 col = vec3(0.);
+    
+    vec3 en = hash31(seed);
+    vec3 baseCol = en;
+    for(float i=0.; i<NUM_PARTICLES; i++) {
+               vec3 n = hash31(i)-.5;
+       
+                               vec2 startP = p-vec2(0., t*t*.1);        
+        vec2 endP = startP+normalize(n.xy)*n.z;
+        
+        
+        float pt = 1.-pow(t-1., 2.);
+        vec2 pos = mix(p, endP, pt);    
+        float size = mix(.01, .005, smoothstep(0., .1, pt));
+        size *= smoothstep(1., .1, pt);
+        
+        float sparkle = (sin((pt+n.z)*100.)*.5+.5);
+        sparkle = pow(sparkle, pow(en.x, 3.)*50.)*mix(0.01, .01, en.y*n.y);
+		float B = smoothstep(en.x-en.z, en.x+en.z, t)*smoothstep(en.y+en.z, en.y-en.z, t);
+        size += sparkle*B;
+        
+        col += baseCol*lighter(uv, pos, size);
+    }
+    
+    return col;
+}
+
+
+void fragment() {
+    vec2 iResolution = vec2(1024,600);
+	vec2 uv = FRAGCOORD.xy / iResolution.xy;
+                uv.x -= .5;
+    uv.x *= iResolution.x/iResolution.y;
+    
+    float n = hash12(uv+10.0);
+    float t = TIME*.5;
+    
+    vec3 c = vec3(0.);
+    
+    for(float i=0.; i<NUM_EXPLOSIONS; i++) {
+               float et = t+i*1234.45235;
+        float id = floor(et);
+        et -= id;
+        
+        vec2 p = hash31(id).xy;
+        p.x -= .5;
+        p.x *= 1.6;
+        c += explosion(uv, p, id, et);
+		}
+    
+	float alpha = 1.0;
+//	if (c.x < 0.2){alpha=0.0;} 
+    COLOR = vec4(c, alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/PI = 3.14159
+shader_param/TWOPI = 6.28319
+shader_param/NUM_EXPLOSIONS = 5.0
+shader_param/NUM_PARTICLES = 40.0
+shader_param/MOD3 = Vector3( 0.1031, 0.11369, 0.13787 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "fadeout"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../BlackColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.7, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BlackColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.1, 4.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+
+[node name="UserInterface" type="Control"]
+pause_mode = 2
+light_mask = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 23.0
+margin_right = 60.0
+margin_bottom = 37.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StageNextLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="StageNextLabel"]
+wait_time = 2.0
+one_shot = true
+
+[node name="ShotsFiredLabel" type="Label" parent="."]
+margin_left = 888.152
+margin_top = 55.0
+margin_right = 928.152
+margin_bottom = 69.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShotsHitLabel" type="Label" parent="."]
+margin_left = 888.152
+margin_top = 72.0
+margin_right = 928.152
+margin_bottom = 86.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShootRateLabel" type="Label" parent="."]
+margin_left = 19.694
+margin_top = 116.675
+margin_right = 59.694
+margin_bottom = 130.675
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CritChanceLabel" type="Label" parent="."]
+margin_left = 19.694
+margin_top = 135.746
+margin_right = 59.694
+margin_bottom = 149.746
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AccuracyLabel" type="Label" parent="."]
+margin_left = 888.152
+margin_top = 89.0
+margin_right = 928.152
+margin_bottom = 103.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StageWaveTimerLabel" type="Label" parent="."]
+margin_left = 458.02
+margin_top = 22.0
+margin_right = 537.02
+margin_bottom = 37.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TecShotLabel" type="Label" parent="."]
+visible = false
+margin_left = 903.0
+margin_top = 111.0
+margin_right = 964.0
+margin_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 31.2978, 6.67269 )
+text = "TEC SHOT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DoubleKillLabel" type="Label" parent="."]
+visible = false
+margin_left = 903.0
+margin_top = 128.0
+margin_right = 964.0
+margin_bottom = 142.0
+text = "DOUBLE KILL"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TripleKillLabel" type="Label" parent="."]
+visible = false
+margin_left = 901.941
+margin_top = 145.0
+margin_right = 974.941
+margin_bottom = 159.0
+text = "TRIPLE KILL"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_left = 256.0
+margin_top = 976.0
+margin_right = 2304.0
+margin_bottom = 1076.0
+rect_scale = Vector2( 1, 4 )
+texture_under = SubResource( 2 )
+texture_progress = SubResource( 4 )
+fill_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="HealthBar"]
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = 465.964
+margin_top = 984.746
+margin_right = 505.964
+margin_bottom = 998.746
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ImmuneBar" type="TextureProgress" parent="."]
+margin_left = 256.42
+margin_top = 971.739
+margin_right = 2304.42
+margin_bottom = 1011.74
+rect_scale = Vector2( 1, 4.67998 )
+max_value = 0.75
+step = 0.01
+texture_under = SubResource( 6 )
+texture_progress = SubResource( 8 )
+fill_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ImmuneLabel" type="Label" parent="."]
+margin_left = 450.105
+margin_top = 954.685
+margin_right = 490.105
+margin_bottom = 968.685
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.538462 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StageClear" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+light_mask = 0
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StageClear"]
+modulate = Color( 2, 2, 3, 1 )
+margin_left = 445.601
+margin_top = 336.24
+margin_right = 532.601
+margin_bottom = 350.24
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StageClear"]
+anims/fadeout = SubResource( 11 )
+anims/stage_clear = SubResource( 12 )
+
+[node name="PauseMenu" type="ColorRect" parent="."]
+visible = false
+light_mask = -2147483648
+margin_right = 1024.0
+margin_bottom = 1024.0
+color = Color( 0, 0, 0, 0.639216 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseLabel" type="Label" parent="PauseMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -73.5
+margin_top = -109.994
+margin_right = 73.5
+margin_bottom = -78.994
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+
+[node name="ContinueTimer" type="Timer" parent="PauseMenu"]
+pause_mode = 2
+wait_time = 10.0
+one_shot = true
+
+[node name="CountdownLabel" type="Label" parent="PauseMenu"]
+margin_left = 501.619
+margin_top = 607.975
+margin_right = 541.619
+margin_bottom = 621.975
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="PauseMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.0
+margin_top = -70.0
+margin_right = 48.0
+margin_bottom = 70.0
+
+[node name="ContinueButton" type="TextureButton" parent="PauseMenu/Menu"]
+visible = false
+light_mask = 0
+margin_right = 96.0
+margin_bottom = 32.0
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 7 )
+texture_focused = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetryButton" type="TextureButton" parent="PauseMenu/Menu"]
+light_mask = 0
+margin_right = 96.0
+margin_bottom = 32.0
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 6 )
+texture_hover = ExtResource( 9 )
+texture_focused = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="PauseMenu/Menu"]
+light_mask = 0
+margin_top = 36.0
+margin_right = 96.0
+margin_bottom = 68.0
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 8 )
+texture_hover = ExtResource( 5 )
+texture_focused = ExtResource( 5 )
+
+[node name="QuitButton" type="TextureButton" parent="PauseMenu/Menu"]
+margin_top = 72.0
+margin_right = 96.0
+margin_bottom = 104.0
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
+texture_focused = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="PauseMenu/Menu/ContinueButton" to="." method="_on_ContinueButton_button_up"]
+[connection signal="button_up" from="PauseMenu/Menu/RetryButton" to="." method="_on_RetryButton_button_up"]
+[connection signal="button_up" from="PauseMenu/Menu/BackButton" to="." method="_on_BackButton_button_up"]
+[connection signal="button_up" from="PauseMenu/Menu/QuitButton" to="." method="_on_Quit_button_up"]

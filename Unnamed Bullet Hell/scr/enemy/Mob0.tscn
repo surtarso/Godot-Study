@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scr/actors/EnemyClass.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scr/enemy/Mob0.gd" type="Script" id=2]
+[ext_resource path="res://scr/bullets/EB3.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/enemies/blackskullmob.png" type="Texture" id=4]
+[ext_resource path="res://assets/enemies/blackskullmobnormal.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shoot"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[node name="Mob0" instance=ExtResource( 1 )]
+can_sleep = false
+script = ExtResource( 2 )
+side_bounce = true
+side_bounce_lenght = 4.5
+side_bounce_rate = 1.5
+can_shoot = true
+bullets_array = [ ExtResource( 3 ) ]
+aim_at_player = true
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 4 )
+normal_map = ExtResource( 5 )
+vframes = 3
+hframes = 3
+frame = 7
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="Light2D2" parent="Sprite/aim" index="0"]
+enabled = false
+color = Color( 0.945098, 0.619608, 0.054902, 1 )
+energy = 1.5
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false
+
+[node name="VisibilityEnabler2D" parent="." index="3"]
+visible = false
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="10"]
+anims/shoot = SubResource( 1 )

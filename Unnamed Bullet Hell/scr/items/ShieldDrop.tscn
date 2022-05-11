@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scr/items/ItemDropClass.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scr/items/ShieldDrop.gd" type="Script" id=2]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+width = 32
+height = 32
+noise = SubResource( 1 )
+
+[node name="ShieldDrop" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+self_modulate = Color( 1.09, 1.16, 1.17, 1 )
+texture = SubResource( 2 )
