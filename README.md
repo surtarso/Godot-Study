@@ -1,4 +1,4 @@
-# Godot-Projects
+# Godot Projects
 My projects using the Godot Engine and GDScript
 
 ## The Secrets of the Bong
