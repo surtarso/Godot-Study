@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scr/actors/EnemyClass.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scr/enemy/Mob1.gd" type="Script" id=2]
+[ext_resource path="res://scr/bullets/EB1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/enemies/purplebrainmob.png" type="Texture" id=4]
+[ext_resource path="res://assets/enemies/purplebrainmobnormal.png" type="Texture" id=5]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -0.320368, 0, 0, Vector2( 0.988506, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.116083, 0.0372562, 0.187012, 1, 0, 0, 0, 0.760784 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "shoot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5 ]
+}
+
+[node name="Mob1" instance=ExtResource( 1 )]
+can_sleep = false
+script = ExtResource( 2 )
+side_bounce = true
+side_bounce_lenght = 5.7
+can_shoot = true
+shoot_rate = 1.5
+bullets_array = [ ExtResource( 3 ) ]
+aim_randomly = true
+aim_random_rate = 13.0
+
+[node name="Sprite" parent="." index="0"]
+light_mask = 0
+texture = ExtResource( 4 )
+normal_map = ExtResource( 5 )
+vframes = 3
+hframes = 2
+frame = 5
+region_rect = Rect2( 0, 64, 64, 64 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite/aim" index="0"]
+position = Vector2( 0.479996, -27.7665 )
+lifetime = 0.5
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 9.26
+flag_align_y = true
+scale_amount = 50.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="Light2D2" parent="Sprite/aim" index="1"]
+position = Vector2( 0.479996, 2.77728 )
+enabled = false
+texture_scale = 0.7
+color = Color( 0.054902, 0.592157, 0.945098, 1 )
+mode = 2
+range_layer_max = -1
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false
+
+[node name="VisibilityEnabler2D" parent="." index="3"]
+visible = false
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="9"]
+anims/shoot = SubResource( 3 )

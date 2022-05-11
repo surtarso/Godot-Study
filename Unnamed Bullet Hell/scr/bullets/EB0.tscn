@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scr/bullets/EB0.gd" type="Script" id=1]
+[ext_resource path="res://scr/bullets/EnemyBullet.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "/* 
+Original shader from Fubucci – https://www.febucci.com/2019/05/fire-shader/ 
+Converted to Godot Shader Language by Godot Shaders - godotshaders.com/shader/2D-fire/
+*/
+
+shader_type canvas_item;
+
+uniform sampler2D noise_tex;
+uniform sampler2D gradient_tex;
+
+uniform vec4 brighter_color : hint_color = vec4(1.0, 0.8, 0.0, 1.0);
+uniform vec4 middle_color : hint_color  = vec4(1.0, 0.56, 0.0, 1.0);
+uniform vec4 darker_color : hint_color  = vec4(0.64, 0.2, 0.05, 1.0);
+
+uniform float spread : hint_range(0.0, 1.0) = 0.5;
+
+void fragment()
+{
+	
+	float noise_value = texture(noise_tex, UV + vec2(0.0, TIME)).x;
+	// The .yx swizzle is when using the built in horizontal gradient texture. If you have a vertical gradient texture remove .yx
+	float gradient_value = texture(gradient_tex, UV.yx).x;
+	
+	gradient_value -= smoothstep(spread, spread + 0.5, length(UV + vec2(-0.5, -0.5)) / spread);
+	
+	float step1 = step(noise_value, gradient_value);
+	float step2 = step(noise_value, gradient_value - 0.2);
+	float step3 = step(noise_value, gradient_value - 0.4);
+	
+	vec3 bd_color = mix(brighter_color.rgb, darker_color.rgb, step1 - step2);
+	
+	vec4 color = vec4(bd_color, step1);
+	color.rgb = mix(color.rgb, middle_color.rgb, step2 - step3);
+	
+	COLOR = color;
+}"
+
+[sub_resource type="Gradient" id=2]
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="OpenSimplexNoise" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+width = 128
+height = 256
+noise = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 1 )
+shader_param/brighter_color = Color( 1.11, 0.47, 1.21, 1 )
+shader_param/middle_color = Color( 0.427451, 0.2, 0.756863, 1 )
+shader_param/darker_color = Color( 0.258824, 0.0392157, 0.584314, 1 )
+shader_param/spread = 0.563
+shader_param/noise_tex = SubResource( 5 )
+shader_param/gradient_tex = SubResource( 3 )
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 8.21634
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.420118 )
+colors = PoolColorArray( 0.799657, 0.0595646, 0.896973, 1, 0.150313, 0, 0.436035, 1 )
+
+[node name="EB0" instance=ExtResource( 2 )]
+collision_mask = 27
+script = ExtResource( 1 )
+bullet_speed = 6.5
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 6.36, 0.97, 8.09, 1 )
+self_modulate = Color( 4.76, 4.65, 2.36, 1 )
+material = SubResource( 6 )
+rotation = -1.5708
+scale = Vector2( 2.28, 2.9491 )
+
+[node name="Light2D" parent="Sprite" index="0"]
+scale = Vector2( 0.05, 0.05 )
+color = Color( 0.501961, 0.32549, 0.988235, 1 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 7 )
+
+[node name="VisibilityEnabler2D" parent="." index="2"]
+visible = true
+
+[node name="CPUParticles2D" parent="." index="3"]
+position = Vector2( -3.75829, 0 )
+amount = 30
+lifetime = 0.2
+color_ramp = SubResource( 8 )

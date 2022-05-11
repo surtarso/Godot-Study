@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scr/items/ItemDropClass.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/itemdrops/spindrop.png" type="Texture" id=2]
+[ext_resource path="res://scr/items/SpinDrop.gd" type="Script" id=3]
+
+[node name="SpinDrop" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+self_modulate = Color( 1.06, 0.05, 1.04, 1 )
+material = null
+texture = ExtResource( 2 )

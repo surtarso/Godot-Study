@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/enemies/eyemob4.png" type="Texture" id=1]
+[ext_resource path="res://scr/actors/EnemyClass.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scr/bullets/EB2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scr/enemy/Mob2.gd" type="Script" id=4]
+[ext_resource path="res://scr/bullets/Meteor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/enemies/eyemob4normal.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 1, 0 ]
+}
+
+[node name="Mob2" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+down_speed = 0.8
+up_bounce = true
+up_bounce_speed = 2.0
+up_bounce_rate = 1.0
+can_shoot = true
+shoot_rate = 0.85
+bullets_array = [ ExtResource( 3 ), ExtResource( 5 ) ]
+aim_spin = true
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 1 )
+normal_map = ExtResource( 6 )
+vframes = 3
+hframes = 3
+
+[node name="Light2D" parent="Sprite" index="0"]
+scale = Vector2( 0.571363, 0.536912 )
+range_layer_max = -1
+
+[node name="Position2D2" type="Position2D" parent="Sprite" index="2"]
+position = Vector2( 31.3687, 0 )
+
+[node name="Position2D3" type="Position2D" parent="Sprite" index="3"]
+position = Vector2( -31.7025, 0 )
+rotation = 3.14159
+
+[node name="Position2D4" type="Position2D" parent="Sprite" index="4"]
+position = Vector2( 0, -31.702 )
+rotation = -1.5708
+
+[node name="Light2D2" parent="Sprite/aim" index="0"]
+position = Vector2( 0.33371, -28.3653 )
+color = Color( 0.764706, 0.160784, 0.117647, 1 )
+energy = 1.5
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false
+
+[node name="VisibilityEnabler2D" parent="." index="3"]
+visible = false
+
+[node name="DelayTimer" type="Timer" parent="." index="9"]
+wait_time = 0.17
+one_shot = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="11"]
+anims/default = SubResource( 1 )
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
