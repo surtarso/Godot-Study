@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ramps/ramp1.png" type="Texture" id=1]
+
+[node name="Ramp01" type="RigidBody2D"]
+collision_mask = 0
+mode = 1
+mass = 10.2041
+continuous_cd = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -128.353, -1.60776, -20.0435, -32.0477, -18.8636, -26.8564, -23.819, -25.9125, -17.2119, -4.91132, 0.177708, -10.2865, 58.3656, -9.6554, 70.109, 3.57457, 83.3389, 14.872, 95.9743, 21.8586, 109.65, 25.7235, 138.34, 25.8722, 138.488, 30.1831, -138.551, 30.0185, -138.971, 25.3935, -128.67, 25.6038, -117.318, 22.4504, -119.841, 12.9903, -123.204, 1.84844, -127.829, 2.47912 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
