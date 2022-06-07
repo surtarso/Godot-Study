@@ -1,4 +1,4 @@
-# Godot Projects
+# <img src="ico.png" width=45 height=45> Godot Projects
 My projects using the Godot Engine with GDScript language.
 You can download the desired folder and run with Godot 3+.
 
