@@ -606,7 +606,7 @@ position = Vector2( -80, 210 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 14 )
 animation = "patrol"
-frame = 3
+frame = 1
 playing = true
 flip_h = true
 
@@ -616,7 +616,7 @@ position = Vector2( -40, 210 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 63 )
 animation = "running"
-frame = 11
+frame = 10
 playing = true
 
 [node name="WeedSmellParticles" type="CPUParticles2D" parent="PotSprite"]
