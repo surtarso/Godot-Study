@@ -1,0 +1,12 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1691169204
+icon.png::CompressedTexture2D::5509112384008991059::1691169194::1691169205::1::::<><>::
+README.md::TextFile::-1::1691169194::0::1::::<><>::
+::res://img/::1691169194
+crown.png::CompressedTexture2D::5351803888007876558::1691169194::1691169205::1::::<><>::
+::res://scene/::1691169194
+game.tscn::PackedScene::-1::1691169194::0::1::::<><>::res://script/game.gd
+main.tscn::PackedScene::1866334328212545590::1691169194::0::1::::<><>::res://script/main.gd<>res://scene/game.tscn
+::res://script/::1691169194
+game.gd::GDScript::-1::1691169194::0::1::::<>Control<>::
+main.gd::GDScript::-1::1691169194::0::1::::<>Control<>::
